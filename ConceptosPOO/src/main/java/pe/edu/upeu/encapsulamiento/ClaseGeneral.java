@@ -2,6 +2,17 @@ package pe.edu.upeu.encapsulamiento;
 
 public class ClaseGeneral {
 
+    public static void probarJugador() {
+        Jugador jugador = new Jugador();
+        jugador.setNombre("Messi");
+        jugador.setApellido("Argentino");
+        jugador.setEdad(25);
+        jugador.setPosision("Delantero");
+        jugador.setNumeroCam(15);
+
+        jugador.toString();
+    }
+
     public static void probar() {
         Estudiante estudiante = new Estudiante();
         estudiante.setCarrera("Ing. Sistemas");
@@ -20,6 +31,7 @@ public class ClaseGeneral {
 
         probar();
 
+        probarJugador();
         /*ClaseGeneral cg = new ClaseGeneral();
         cg.probar();*/
     }
