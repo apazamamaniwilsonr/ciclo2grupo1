@@ -4,6 +4,13 @@ public class Estudiante {
     private String codigo;
     private String carrera;
 
+    public Estudiante(){}
+
+    public Estudiante(String carrera, String codigo) {
+        this.carrera = carrera;
+        this.codigo = codigo;
+    }
+
     public void trabajo(){
         System.out.println("estudiar, investigar"+"en la carrera de: "+carrera);
     }

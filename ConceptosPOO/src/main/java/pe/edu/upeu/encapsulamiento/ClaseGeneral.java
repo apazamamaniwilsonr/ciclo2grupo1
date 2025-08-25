@@ -10,7 +10,7 @@ public class ClaseGeneral {
         jugador.setPosision("Delantero");
         jugador.setNumeroCam(15);
 
-        jugador.toString();
+        System.out.println(jugador);
     }
 
     public static void probar() {

@@ -1,10 +1,16 @@
 package pe.edu.upeu.encapsulamiento;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+/*import lombok.Getter;
+import lombok.Setter;*/
 
-@Getter
-@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+/*@Getter
+@Setter*/
 public class Jugador {
     private String nombre;
     private String apellido;
