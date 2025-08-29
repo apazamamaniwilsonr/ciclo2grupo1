@@ -11,7 +11,8 @@ public class ClaseExterna {
     class ClaseInterna2{
         double r;
         double restar(){
-            return r+b;
+            r=a-b;
+            return r;
         }
     }
 }
