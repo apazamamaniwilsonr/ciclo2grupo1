@@ -17,5 +17,9 @@ public class Estudiante {
     public static void main(String[] args) {
         Estudiante e=new Estudiante("202510052","Wilson","Apaza",GENERO.Masculino,Carrera.Sistemas);
         System.out.println(e.apellido+" "+e.genero+" "+e.carrera);
+
+        for (Carrera c:Carrera.values()) {
+            System.out.println(c);
+        }
     }
 }
