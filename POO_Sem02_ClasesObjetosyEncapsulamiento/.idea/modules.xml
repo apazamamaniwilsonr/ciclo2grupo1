@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/POO_Sem02_ClasesObjetosyEncapsulamiento.iml" filepath="$PROJECT_DIR$/.idea/POO_Sem02_ClasesObjetosyEncapsulamiento.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/pe/com/com.iml" filepath="$PROJECT_DIR$/src/pe/com/com.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/pe/com/empresa/empresa.iml" filepath="$PROJECT_DIR$/src/pe/com/empresa/empresa.iml" />
+    </modules>
+  </component>
+</project>
