@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Estudiante {
+public class Participante {
     private StringProperty nombre;
     private BooleanProperty estado;
 
