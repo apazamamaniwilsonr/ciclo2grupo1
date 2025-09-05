@@ -1,10 +1,12 @@
 package pe.edu.epeu.asistencia.servicio;
 
+import org.springframework.stereotype.Service;
 import pe.edu.epeu.asistencia.modelo.Participante;
 import pe.edu.epeu.asistencia.repositorio.ParticipanteRepository;
 
 import java.util.List;
 
+@Service
 public class ParticipanteServicioImp extends ParticipanteRepository implements ParticipanteServicioI {
 
     @Override
