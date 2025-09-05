@@ -1,25 +1,30 @@
 package pe.edu.epeu.asistencia.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@Getter
+@NoArgsConstructor
 public enum Carrera {
-    SISTEMAS(Facultad.FIA),
-    CIVIL(Facultad.FIA),
-    AMBIENTAL(Facultad.FIA),
+    SISTEMAS(Facultad.FIA,"Sistemas"),
+    CIVIL(Facultad.FIA,"Civil"),
+    AMBIENTAL(Facultad.FIA,"Ambiental"),
 
-    ADMINISTRACION(Facultad.FCE),
+    ADMINISTRACION(Facultad.FCE,"Administrador"),
 
-    NUTRICION(Facultad.FCS),
+    NUTRICION(Facultad.FCS,"Nutricion"),
 
-    EDUCACION(Facultad.FACIHED),
+    EDUCACION(Facultad.FACIHED,"Educacion"),
 
-    GENERAL(Facultad.GENERAL),
-    ;
+    GENERAL(Facultad.GENERAL,"General");
+
     private Facultad facultad;
+    private String descripcion;
 
-    Carrera(Facultad facultad) {
-        this.facultad = facultad;
-    }
-
-    public Facultad getFacultad() {
-        return facultad;
+    @Override
+    public String toString() {
+        return descripcion;
     }
 }
