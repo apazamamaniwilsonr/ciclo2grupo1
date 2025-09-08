@@ -4,11 +4,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import pe.edu.epeu.asistencia.enums.Carrera;
@@ -34,9 +33,9 @@ public class ParticipanteController {
 
     @Autowired
     ParticipanteServicioI ps;
-
     TableColumn<Participante,String> dniCol, nombreCol, apellidosCol, carreraCol, tipoParticipanteCol;
-
+    TableColumn<Participante,Void> opcCol;
+    int indexEdit=-1;
     @FXML
     public void initialize(){
         cbxCarrera.getItems().addAll(Carrera.values());
@@ -56,6 +55,7 @@ public class ParticipanteController {
         txtDNI.setText("");
         cbxCarrera.getSelectionModel().clearSelection();
         cbxTipoParticipante.getSelectionModel().clearSelection();
+        txtDNI.requestFocus();
     }
 
     @FXML
@@ -66,7 +66,12 @@ public class ParticipanteController {
         p.setApellidos(new SimpleStringProperty(txtApellidos.getText()));
         p.setCarrera(cbxCarrera.getSelectionModel().getSelectedItem());
         p.setTipoParticipante(cbxTipoParticipante.getSelectionModel().getSelectedItem());
-        ps.save(p);
+        if (indexEdit==-1){
+            ps.save(p);
+        }else {
+            ps.update(p,indexEdit);
+            indexEdit=-1;
+        }
         limpiarFormulario();
         listarParticipante();
 
@@ -78,8 +83,8 @@ public class ParticipanteController {
         apellidosCol = new TableColumn<>("Apellido");
         carreraCol = new TableColumn<>("Carrera");
         tipoParticipanteCol = new TableColumn<>("Tipo Participante");
-
-        TableRegPart.getColumns().addAll(dniCol, nombreCol, apellidosCol, carreraCol, tipoParticipanteCol);
+        opcCol = new TableColumn<>("Opciones");
+        TableRegPart.getColumns().addAll(dniCol, nombreCol, apellidosCol, carreraCol, tipoParticipanteCol, opcCol);
     }
 
     public void listarParticipante(){
@@ -87,8 +92,47 @@ public class ParticipanteController {
         nombreCol.setCellValueFactory(cellData -> cellData.getValue().getNombre());
         apellidosCol.setCellValueFactory(cellData -> cellData.getValue().getApellidos());
         carreraCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCarrera().toString()));
+        agregarAccionesButton();
         participantes = FXCollections.observableList(ps.findAll());
         TableRegPart.setItems(participantes);
 
+    }
+    public void eliminarParticipante(int index){
+        ps.delete(index);
+        listarParticipante();
+    }
+    public void editarParticipante(Participante p, int index){
+        txtDNI.setText(p.getDni().getValue());
+        txtApellidos.setText(p.getApellidos().getValue());
+        txtNombres.setText(p.getNombre().getValue());
+        cbxCarrera.getSelectionModel().select(p.getCarrera());
+        cbxTipoParticipante.getSelectionModel().select(p.getTipoParticipante());
+        indexEdit=index;
+    }
+    public void agregarAccionesButton(){
+        Callback<TableColumn<Participante, Void>, TableCell<Participante, Void>> cellFactory = param -> new TableCell<>(){
+            private final Button btnEdit = new Button("Editar");
+            private final Button btnDelet = new Button("Eliminar");
+            {
+                btnEdit.setOnAction(event -> {
+                    Participante p = getTableView().getItems().get(getIndex());
+                    editarParticipante(p, getIndex());
+                });
+                btnDelet.setOnAction(event -> {
+                    eliminarParticipante(getIndex());
+                });
+            }
+            @Override
+            public void updateItem(Void item, boolean empty){
+                super.updateItem(item, empty);
+                if(empty){setGraphic(null);
+                }else {
+                    HBox hBox = new HBox(btnEdit, btnDelet);
+                    hBox.setSpacing(10);
+                    setGraphic(hBox);
+                }
+            }
+        };
+        opcCol.setCellFactory(cellFactory);
     }
 }
