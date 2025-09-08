@@ -92,6 +92,7 @@ public class ParticipanteController {
         nombreCol.setCellValueFactory(cellData -> cellData.getValue().getNombre());
         apellidosCol.setCellValueFactory(cellData -> cellData.getValue().getApellidos());
         carreraCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCarrera().toString()));
+        tipoParticipanteCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTipoParticipante().toString()));
         agregarAccionesButton();
         participantes = FXCollections.observableList(ps.findAll());
         TableRegPart.setItems(participantes);

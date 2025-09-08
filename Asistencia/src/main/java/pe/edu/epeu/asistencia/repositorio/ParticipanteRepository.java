@@ -18,7 +18,7 @@ public abstract class ParticipanteRepository {
                 new SimpleStringProperty("wilson"),
                 new SimpleStringProperty("apaza"),
                 Carrera.SISTEMAS,
-                TipoParticipante.ASISTENTE,
+                TipoParticipante.ORGANIZADOR,
                 new SimpleBooleanProperty(true)
                 ));
         return participantes;
