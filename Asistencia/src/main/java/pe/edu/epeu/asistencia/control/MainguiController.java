@@ -6,6 +6,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ public class MainguiController {
     public void initialize(){
         comboBoxEstilo.getItems().addAll("Estilo por defecto","Estilo oscuro","Estilo azul","Estilo verde","Estilo rosado");
 
+        comboBoxEstilo.setOnAction(Event ->cambiarEstilo());
         customMenuEstilo.setHideOnClick(false);
 
         menu2.getItems().add(customMenuEstilo);
@@ -47,6 +49,23 @@ public class MainguiController {
         menuItem1.setOnAction(mIL::handle);
         menuItem2.setOnAction(mIL::handle);
         menuItemC.setOnAction(mIL::handle);
+    }
+
+    public void cambiarEstilo(){
+        String estilo=comboBoxEstilo.getSelectionModel().getSelectedItem();
+        Scene scene=bp.getScene();
+        scene.getStylesheets().clear();
+        switch(estilo){
+            case "Estilo oscuro":
+                scene.getStylesheets().add(getClass().getResource("/css/estilo-oscuro.css").toExternalForm()); break;
+            case "Estilo azul":
+                scene.getStylesheets().add(getClass().getResource("/css/estilo-azul.css").toExternalForm()); break;
+            case "Estilo verde":
+                scene.getStylesheets().add(getClass().getResource("/css/estilo-verde.css").toExternalForm()); break;
+            case "Estilo rosado":
+                scene.getStylesheets().add(getClass().getResource("/css/estilo-rosado.css").toExternalForm()); break;
+            default:break;
+        }
     }
 
     class MenuItemListener{
