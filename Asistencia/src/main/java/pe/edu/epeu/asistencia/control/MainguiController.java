@@ -24,13 +24,24 @@ public class MainguiController {
     @FXML
     private TabPane tabPane;
     @FXML
-    private Menu menu1;
+    private Menu menu1, menu2=new Menu("Cambiar Estilo");
     @FXML
     private MenuItem menuItem1, menuItem2, menuItemC;
+
+    private ComboBox<String> comboBoxEstilo=new ComboBox<>();
+    private CustomMenuItem customMenuEstilo=new CustomMenuItem(comboBoxEstilo);
+
     @Autowired
     private ApplicationContext context;
 
     public void initialize(){
+        comboBoxEstilo.getItems().addAll("Estilo por defecto","Estilo oscuro","Estilo azul","Estilo verde","Estilo rosado");
+
+        customMenuEstilo.setHideOnClick(false);
+
+        menu2.getItems().add(customMenuEstilo);
+        menuBar.getMenus().addAll(menu2);
+
         MenuListener mL = new MenuListener();
         MenuItemListener mIL = new MenuItemListener();
         menuItem1.setOnAction(mIL::handle);
