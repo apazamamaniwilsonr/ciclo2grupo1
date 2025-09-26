@@ -18,5 +18,5 @@ public class Participante {
     private Carrera carrera;
     private TipoParticipante tipoParticipante;
     private BooleanProperty estado;
-
 }
+
