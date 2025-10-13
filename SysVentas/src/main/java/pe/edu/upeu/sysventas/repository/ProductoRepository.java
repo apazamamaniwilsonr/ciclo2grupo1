@@ -1,0 +1,29 @@
+package pe.edu.upeu.sysventas.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+import pe.edu.upeu.sysventas.model.Producto;
+
+import java.util.List;
+
+@Repository
+//esta aplicando el concepto genericos al usar Producto
+public interface ProductoRepository extends JpaRepository<Producto, Long> {
+
+    //consulta nativa es upeu_producto, consulta sql/nativa
+    @Query(value = "SELECT p.* FROM upeu_producto p WHERE p.nombre like:filter", nativeQuery = true)
+    List<Producto> listAutoCompletProducto(@Param("filter") String filter);
+
+    @Query(value = "SELECT p.* FROM upeu_producto p WHERE p.id_marca=:filter", nativeQuery = true)
+    List<Producto> listProductoMarca(@Param("filter") Integer filter);
+
+    //consulta jpql
+    @Query("SELECT p FROM Producto p WHERE p.nombre LIKE :filter")
+    List<Producto> listAutoCompletProductoJ(@Param("filter") String filter);
+
+    @Query("SELECT p FROM Producto p WHERE p.marca.idMarca = :filter")
+    List<Producto> listProductoMarcaJ(@Param("filter") Integer filter);
+}
+
