@@ -1,5 +1,6 @@
 package pe.edu.upeu.sysventas.service;
 
+import org.springframework.stereotype.Service;
 import org.yaml.snakeyaml.events.Event;
 import pe.edu.upeu.sysventas.dto.ComboBoxOption;
 import pe.edu.upeu.sysventas.model.Categoria;
